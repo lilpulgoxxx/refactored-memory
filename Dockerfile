@@ -11,9 +11,6 @@ RUN dnf update -y && \
         libstdc++ \
         && dnf clean all
 
-RUN ln -s /usr/bin/python3 /usr/bin/python && \
-    ln -s /usr/bin/pip3 /usr/bin/pip
-
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app
 
 WORKDIR /app
