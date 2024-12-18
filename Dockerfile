@@ -18,8 +18,8 @@ WORKDIR /app
 RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh && \
     chmod +x webui.sh
 
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r requirements.txt
 
 EXPOSE 7860
 
