@@ -19,7 +19,7 @@ RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-web
     chmod +x webui.sh
 
 RUN pip3 install --upgrade pip && \
-    pip3 install -r requirements.txt
+    pip3 install -r /app/requirements.txt
 
 EXPOSE 7860
 
