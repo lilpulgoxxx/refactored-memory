@@ -13,9 +13,7 @@ RUN dnf update -y && \
 
 WORKDIR /app
 
-RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-
-COPY . .
+RUN cd /app && git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
 RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh && \
     chmod +x webui.sh
