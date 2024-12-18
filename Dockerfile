@@ -1,12 +1,18 @@
-FROM python:3.10-slim
+FROM fedora:latest
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+RUN dnf update -y && \
+    dnf install -y \
         git \
         wget \
-        libgl1 \
-        libglib2.0-0 \
-        && rm -rf /var/lib/apt/lists/*
+        python3 \
+        python3-pip \
+        libglvnd-glx \
+        libglvnd-opengl \
+        libstdc++ \
+        && dnf clean all
+
+RUN ln -s /usr/bin/python3 /usr/bin/python && \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app
 
