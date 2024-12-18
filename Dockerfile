@@ -1,25 +1,29 @@
-FROM fedora:latest
+# Use the Fedora base image
+FROM fedora:38
 
-RUN dnf update -y && \
-    dnf install -y \
-        git \
-        wget \
-        python3 \
-        python3-pip \
-        libglvnd-glx \
-        libglvnd-opengl \
-        libstdc++ \
-        && dnf clean all
+# Install dependencies
+RUN dnf install -y \
+    wget \
+    git \
+    python3 \
+    gperftools-libs \
+    libglvnd-glx \
+    && dnf clean all
 
-WORKDIR /app
+# Install Python 3.11
+RUN dnf install -y python3.11 && dnf clean all
 
-RUN cd /app && git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+# Set the environment variable for Python command
+ENV python_cmd=python3.11
 
-RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh && \
-    chmod +x webui.sh
+# Clone the Stable Diffusion web UI repository
+RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui /opt/stable-diffusion-webui
 
-RUN pip3 install --upgrade pip
+# Set the working directory
+WORKDIR /opt/stable-diffusion-webui
 
+# Expose the port for the web UI
 EXPOSE 7860
 
-CMD ["./webui.sh", "--listen", "--port", "7860"]
+# Run the web UI
+CMD ["bash", "webui.sh"]
